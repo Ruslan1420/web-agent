@@ -1,0 +1,19 @@
+# Сборка
+build/
+*.o
+*.a
+*.so
+*.exe
+*.out
+
+# VS Code
+.vscode/
+
+# Рабочие папки агента
+logs/
+work/
+results/
+
+# OS метаданные
+.DS_Store
+Thumbs.db
