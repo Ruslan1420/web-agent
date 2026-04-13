@@ -29,7 +29,7 @@ void saveAccessCode(const std::string& code) {
 int main() {
     std::cout << "=== Web Agent v0.8 ===" << std::endl;
     
-    std::string uid = "WEBAGENT010";
+    std::string uid = "Руслан Мазаев ИУ5-23б";
     std::string descr = "web-agent";
     std::string base_url = "https://xdev.arkcom.ru:9999/app/webagent1/api/";
     
