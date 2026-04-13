@@ -8,8 +8,12 @@
 
 using json = nlohmann::json;
 
+std::string getAccessCodePath() {
+    return "access_code.txt";
+}
+
 std::string loadAccessCode() {
-    std::ifstream file("access_code.txt");
+    std::ifstream file(getAccessCodePath());
     std::string code;
     if (file.is_open()) {
         std::getline(file, code);
@@ -18,18 +22,17 @@ std::string loadAccessCode() {
 }
 
 void saveAccessCode(const std::string& code) {
-    std::ofstream file("access_code.txt");
+    std::ofstream file(getAccessCodePath());
     file << code;
 }
 
 int main() {
-    std::cout << "=== Web Agent v0.6 ===" << std::endl;
+    std::cout << "=== Web Agent v0.8 ===" << std::endl;
     
-    std::string uid = "WEBAGENT003";  // новый UID
+    std::string uid = "WEBAGENT010";
     std::string descr = "web-agent";
     std::string base_url = "https://xdev.arkcom.ru:9999/app/webagent1/api/";
     
-    // Загружаем или регистрируемся
     std::string access_code = loadAccessCode();
     
     if (access_code.empty()) {
@@ -46,7 +49,6 @@ int main() {
         
         auto reg_json = json::parse(reg_response.text);
         
-        // Обратите внимание: в ответе регистрации поле называется "access_code"
         if (reg_json.contains("access_code")) {
             access_code = reg_json["access_code"];
             saveAccessCode(access_code);
@@ -59,7 +61,6 @@ int main() {
         std::cout << "Загружен access_code: " << access_code << std::endl;
     }
     
-    // Основной цикл опроса заданий
     while (true) {
         json task_body = {
             {"UID", uid},
